@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Game, GameDocument } from './mongoose/game.schema';
 import { TagService } from './tag/tag.service';
-import { BASE_URL, DATA_PAGES } from "../config";
+import {  DATA_PAGES } from "../config";
 import { formatDate } from "../utils/parse_date";
 import {readFileSync} from "fs";
 import {join} from "path";
@@ -189,8 +189,8 @@ export class GameService {
       info: {
         "count": count,
         "pages": Math.ceil(count/20),
-        "next": `${BASE_URL}/api/game?page=${pages+1}`,
-        "prev": pages > 1 ? `${BASE_URL}/api/game?page=${pages-1}` : null
+        "next": `${process.env.SERVER_URL}/game?page=${pages+1}`,
+        "prev": pages > 1 ? `${process.env.SERVER_URL}/game?page=${pages-1}` : null
       },
       results: []
     };

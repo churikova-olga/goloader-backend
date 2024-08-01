@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { BASE_URL, DATA_PAGES } from "../config";
+import { DATA_PAGES } from "../config";
 import { reviewInterfaces } from "../interfaces/review.interfaces";
 import { Review, ReviewDocument } from "./mongoose/review.schema";
 import { formatDate } from "../utils/parse_date";
@@ -47,8 +47,8 @@ export class ReviewService {
       info: {
         "count": count,
         "pages": Math.ceil(count/20),
-        "next": `${BASE_URL}/api/review?page=${pages+1}`,
-        "prev": pages > 1 ? `${BASE_URL}/api/riview?page=${pages-1}` : null
+        "next": `${process.env.SERVER_URL}/review?page=${pages+1}`,
+        "prev": pages > 1 ? `${process.env.SERVER_URL}/riview?page=${pages-1}` : null
       },
       results: getReviews
     };
