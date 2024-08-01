@@ -4,8 +4,13 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
   app.setGlobalPrefix('api');
+  app.enableCors({
+    origin: ['http://localhost:8080', 'http://87.228.16.152:8080'],
+    credentials: true,
+    exposedHeaders: 'set-cookie'
+  });
+
   await app.listen(process.env.PORT);
 }
 bootstrap();

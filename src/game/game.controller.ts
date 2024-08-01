@@ -65,19 +65,6 @@ export class GameController {
     return this.gameService.findOne(id);
   }
 
-  // @Get('/uploads/:file?')
-  // uploads(@Param('file') image, @Res() res, @Query('type') type: string) {
-  // // const response = res.sendFile(image, { root: `./uploads/${type}` });
-  // // return {
-  // //   status: HttpStatus.OK,
-  // //   data: response,
-  // // };
-  //   const response = res.download(image, { root: `./uploads/${type}` });
-  //   return {
-  //     status: HttpStatus.OK,
-  //     data: response,
-  //   };
-  // }
 
   @Get('/uploads/:file?')
   buffer(@Param('file') file, @Res() response: Response, @Query('type') type: string) {
