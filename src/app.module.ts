@@ -5,13 +5,14 @@ import { GameModule } from './game/game.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ReviewModule } from "./review/review.module";
 import { MulterModule } from "@nestjs/platform-express";
-
-
+import { ConfigModule } from '@nestjs/config';
 import { FilesModule } from './files/files.module';
-console.log(__dirname);
+
+console.log(process.env.DATABASE_URL)
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/GoLoader'),
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(process.env.DATABASE_URL),
     GameModule,
     ReviewModule,
     FilesModule,
