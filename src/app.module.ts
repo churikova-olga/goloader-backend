@@ -8,7 +8,6 @@ import { MulterModule } from "@nestjs/platform-express";
 import { ConfigModule } from '@nestjs/config';
 import { FilesModule } from './files/files.module';
 
-console.log(process.env.DATABASE_URL)
 @Module({
   imports: [
     ConfigModule.forRoot(),
