@@ -3,8 +3,8 @@ import { AppModule } from './app.module';
 import * as fs from "fs";
 
 const httpsOptions = process.env.TYPE === "DEVELOPMENT" ? {} : {
-  key: fs.readFileSync('./secrets/private-key.pem'),
-  cert: fs.readFileSync('./secrets/public-certificate.pem'),
+  key: fs.readFileSync('./secrets/localhost-key.pem'),
+  cert: fs.readFileSync('./secrets/localhost.pem'),
 };
 async function bootstrap() {
   const app = process.env.TYPE === "DEVELOPMENT" ?
