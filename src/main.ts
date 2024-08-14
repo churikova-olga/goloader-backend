@@ -1,12 +1,20 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import * as fs from "fs";
 
-
+const httpsOptions = process.env.TYPE === "DEVELOPMENT" ? {} : {
+  key: fs.readFileSync('./secrets/private-key.pem'),
+  cert: fs.readFileSync('./secrets/public-certificate.pem'),
+};
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = process.env.TYPE === "DEVELOPMENT" ?
+      await NestFactory.create(AppModule) :
+      await NestFactory.create(AppModule, {httpsOptions});
   app.setGlobalPrefix('api');
   app.enableCors({
-    origin: ['http://localhost:8080', 'http://87.228.16.152:8080', 'http://goloader.pro', 'http://goloader.pro:8080', 'https://goloader.pro:8080'],
+    origin: ['http://localhost:8080','https://localhost:8080', 'https://87.228.16.152:8080',
+      'http://87.228.16.152:8080', 'http://goloader.pro', 'https://goloader.pro:8080'],
+
     credentials: true,
     exposedHeaders: 'set-cookie'
   });
